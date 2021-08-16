@@ -6,7 +6,7 @@
 
 # API
 
-[https://yuheinakasaka.github.io/covid19_emergency/emergency.json](https://yuheinakasaka.github.io/covid19_emergency/emergency.json)
+[https://yuheinakasaka.github.io/covid19_emergency/all.json](https://yuheinakasaka.github.io/covid19_emergency/all.json)
 
 レスポンス例は下記です。
 

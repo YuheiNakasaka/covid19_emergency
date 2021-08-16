@@ -74,7 +74,7 @@ class Generator:
         self.manbou_data = manbou_data
 
     def json_export(self):
-        with open('data/emergency.json', 'w', encoding='utf-8') as f:
+        with open('data/all.json', 'w', encoding='utf-8') as f:
             json.dump({
                 'emergency': self.emergency_data,
                 'manbou': self.manbou_data,

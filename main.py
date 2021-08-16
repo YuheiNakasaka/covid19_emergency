@@ -51,15 +51,18 @@ class Covid19Data:
         return results
 
     def prefecture_data(self, period, prefecture):
-        pettern1 = re.compile(r'(\d+)月(\d+)日から')
-        pettern2 = re.compile(r'(\d+)月(\d+)日まで')
+        pettern1 = re.compile(r'令和(\d+)年(\d+)月(\d+)日から')
+        pettern2 = re.compile(r'令和(\d+)年(\d+)月(\d+)日まで')
         from_ = pettern1.search(period)
         to_ = pettern2.search(period)
         return {
             'name': prefecture,
-            'from': str(from_.group(1)) + '月' + str(from_.group(2)) + '日' if from_ else '',
-            'to': str(to_.group(1)) + '月' + str(to_.group(2)) + '日' if to_ else '',
+            'from': str(self.reiwa_to_seireki(from_.group(1))) + '-' + str(from_.group(2)).zfill(2) + '-' + str(from_.group(3)).zfill(2) if from_ else '',
+            'to': str(self.reiwa_to_seireki(to_.group(1))) + '-' + str(to_.group(2)).zfill(2) + '-' + str(to_.group(3)).zfill(2) if to_ else '',
         }
+
+    def reiwa_to_seireki(self, reiwa):
+        return int(reiwa) - 3 + 2021
 
 
 class Generator:

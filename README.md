@@ -6,7 +6,7 @@
 
 # API
 
-TODO: ここに作成した API を設置
+[https://yuheinakasaka.github.io/covid19_emergency/emergency.json](https://yuheinakasaka.github.io/covid19_emergency/emergency.json)
 
 レスポンス例は下記です。
 
@@ -110,6 +110,7 @@ TODO: ここに作成した API を設置
             "from": "8月8日",
             "to": "8月31日"
         }
-    ]
+    ],
+    "updatedAt": "2021-08-16 16:25:01.052446"
 }
 ```

@@ -75,7 +75,7 @@ class Generator:
             json.dump({
                 'emergency': self.emergency_data,
                 'manbou': self.manbou_data,
-                'updated_at': str(datetime.datetime.now())
+                'updatedAt': str(datetime.datetime.now())
             }, f, indent=4, ensure_ascii=False)
 
 

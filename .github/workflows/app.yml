@@ -23,6 +23,14 @@ jobs:
       - name: Run main script
         run: |
           TZ=Asia/Tokyo python main.py
+      - name: Slack Notification
+        if: failure()
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_MESSAGE: "covid19_emergency was failed to run main.py"
+          SLACK_TITLE: ":fire: Data Update Error :fire:"
+          SLACK_USERNAME: covid19_emergency
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

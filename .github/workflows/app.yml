@@ -2,7 +2,7 @@ name: Main App
 
 on:
   schedule:
-    - cron: "30 0-23 * * *"
+    - cron: "30 0-23/2 * * *"
   push:
     branches: main
 jobs:

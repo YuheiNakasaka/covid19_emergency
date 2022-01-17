@@ -15,6 +15,11 @@ class Covid19Data:
         return self.parse_html()
 
     def fetch_html_soup(self):
+        # test version
+        # html = open('test/temp.html', 'r', encoding='utf-8').read()
+        # soup = BeautifulSoup(html, 'html.parser')
+
+        # production version
         html = requests.get(SOURCE_PAGE_URL)
         soup = BeautifulSoup(html.content, 'html.parser')
         return soup
@@ -22,22 +27,26 @@ class Covid19Data:
     def parse_html(self):
         soup = self.fetch_html_soup()
         contents = soup.find_all(class_='emergency-kv_table02')
-        return self.parse_emergency(contents), self.is_manbou(contents)
+        emergency_result = []
+        manbou_result = []
+        for content in contents:
+            h2 = content.previous_sibling.previous_sibling
+            result = re.match('緊急事態宣言', h2.text)
+            if result:
+                emergency_result.append(self.parse_emergency([content]))
+            result = re.match('まん延防止', h2.text)
+            if result:
+                manbou_result.append(self.parse_manbou([content]))
+        return emergency_result, manbou_result
 
     def parse_emergency(self, contents):
         for content in contents:
-            text = content.find(class_='detail-item').find(class_='detail-item_hd').text
-            result = re.match('緊急事態宣言', text)
-            if result:
-                return self.parse_main_content(content)
+            return self.parse_main_content(content)
         return []
 
-    def is_manbou(self, contents):
+    def parse_manbou(self, contents):
         for content in contents:
-            text = content.find(class_='detail-item').find(class_='detail-item_hd').text
-            result = re.match('まん延防止', text)
-            if result:
-                return self.parse_main_content(content)
+            return self.parse_main_content(content)
         return []
 
     def parse_main_content(self, contents):
